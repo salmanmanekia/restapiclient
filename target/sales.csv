@@ -1,0 +1,5 @@
+header_nk,line_item_nk,customers_nk,products_nk,suppliers_nk,unit_sales_price,products_quantity,sales_datetime,organisation_nk,salespersons_nk,campaigns_nk,sales_value,sales_value_wo_vat,sales_currency,purchase_price,purchase_price_wo_vat,purchase_currency,payment_method,piece_good
+,,,,,,,,,,,0,0,,,,,,
+,2,,Blue shoe,,50,2,2014-12-31T09:22:28+00:00,,,,108.25,100,,108.25,,,Cash,
+,4,,light jacket,,130,3,2014-12-31T09:23:27+00:00,,,,627.85,580,,627.85,,,Cash,
+,4,,light jacket,,130,3,2014-12-31T09:24:53+00:00,,,,1160.44,1072,,1160.44,,,Cash,

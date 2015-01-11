@@ -1,0 +1,352 @@
+{
+    "@attributes": {
+        "count": "4",
+        "limit": "100",
+        "offset": "0"
+    },
+    "Item": [
+        {
+            "Category": {
+                "categoryID": "4",
+                "fullPathName": "Shoes/Sports Shoes",
+                "leftNode": "8",
+                "name": "Sports Shoes",
+                "nodeDepth": "1",
+                "parentID": "2",
+                "rightNode": "9",
+                "timeStamp": "2014-12-16T08:58:23+00:00"
+            },
+            "CustomFieldValues": {
+                "CustomFieldValue": {
+                    "customFieldID": "2",
+                    "customFieldValueID": "4",
+                    "name": "Color",
+                    "type": "string",
+                    "value": "Black"
+                }
+            },
+            "ItemShops": {
+                "ItemShop": [
+                    {
+                        "backorder": "0",
+                        "componentBackorder": "0",
+                        "componentQoh": "0",
+                        "itemID": "2",
+                        "itemShopID": "4",
+                        "qoh": "7",
+                        "reorderLevel": "0",
+                        "reorderPoint": "0",
+                        "shopID": "1",
+                        "timeStamp": "2014-12-16T09:17:23+00:00"
+                    },
+                    {
+                        "backorder": "0",
+                        "componentBackorder": "0",
+                        "componentQoh": "0",
+                        "itemID": "2",
+                        "itemShopID": "6",
+                        "qoh": "7",
+                        "reorderLevel": "0",
+                        "reorderPoint": "0",
+                        "shopID": "0",
+                        "timeStamp": "2014-12-16T09:17:23+00:00"
+                    }
+                ]
+            },
+            "Note": {
+                "isPublic": "false",
+                "note": "this is a note",
+                "timeStamp": "2014-12-16T09:12:09+00:00"
+            },
+            "Prices": {
+                "ItemPrice": [
+                    {
+                        "amount": "100",
+                        "useType": "Default"
+                    },
+                    {
+                        "amount": "100",
+                        "useType": "MSRP"
+                    }
+                ]
+            },
+            "archived": "false",
+            "avgCost": "60",
+            "categoryID": "4",
+            "customSku": "",
+            "defaultCost": "60",
+            "defaultVendorID": "54",
+            "departmentID": "0",
+            "description": "Ecco sports shoe 100",
+            "ean": "12574529433",
+            "itemECommerceID": "0",
+            "itemID": "2",
+            "itemMatrixID": "0",
+            "itemType": "default",
+            "manufacturerID": "0",
+            "manufacturerSku": "",
+            "modelYear": "0",
+            "seasonID": "0",
+            "systemSku": "210000000002",
+            "tax": "true",
+            "taxClassID": "0",
+            "timeStamp": "2014-12-16T09:12:10+00:00",
+            "upc": ""
+        },
+        {
+            "Category": {
+                "categoryID": "8",
+                "fullPathName": "Coats/Winter Coats",
+                "leftNode": "4",
+                "name": "Winter Coats",
+                "nodeDepth": "1",
+                "parentID": "6",
+                "rightNode": "5",
+                "timeStamp": "2014-12-16T08:58:23+00:00"
+            },
+            "CustomFieldValues": {
+                "CustomFieldValue": {
+                    "customFieldID": "2",
+                    "customFieldValueID": "6",
+                    "name": "Color",
+                    "type": "string",
+                    "value": "White"
+                }
+            },
+            "ItemShops": {
+                "ItemShop": [
+                    {
+                        "backorder": "15",
+                        "componentBackorder": "0",
+                        "componentQoh": "0",
+                        "itemID": "4",
+                        "itemShopID": "8",
+                        "qoh": "18",
+                        "reorderLevel": "0",
+                        "reorderPoint": "0",
+                        "shopID": "1",
+                        "timeStamp": "2014-12-16T09:15:33+00:00"
+                    },
+                    {
+                        "backorder": "15",
+                        "componentBackorder": "0",
+                        "componentQoh": "0",
+                        "itemID": "4",
+                        "itemShopID": "10",
+                        "qoh": "18",
+                        "reorderLevel": "0",
+                        "reorderPoint": "0",
+                        "shopID": "0",
+                        "timeStamp": "2014-12-16T09:15:33+00:00"
+                    }
+                ]
+            },
+            "Note": {
+                "isPublic": "false",
+                "note": "",
+                "timeStamp": "2014-12-16T09:12:23+00:00"
+            },
+            "Prices": {
+                "ItemPrice": [
+                    {
+                        "amount": "200",
+                        "useType": "Default"
+                    },
+                    {
+                        "amount": "200",
+                        "useType": "MSRP"
+                    }
+                ]
+            },
+            "archived": "false",
+            "avgCost": "140",
+            "categoryID": "8",
+            "customSku": "",
+            "defaultCost": "140",
+            "defaultVendorID": "12",
+            "departmentID": "0",
+            "description": "Winter Coat Freezy",
+            "ean": "14214134344",
+            "itemECommerceID": "0",
+            "itemID": "4",
+            "itemMatrixID": "0",
+            "itemType": "default",
+            "manufacturerID": "0",
+            "manufacturerSku": "",
+            "modelYear": "0",
+            "seasonID": "0",
+            "systemSku": "210000000004",
+            "tax": "true",
+            "taxClassID": "0",
+            "timeStamp": "2014-12-16T09:12:24+00:00",
+            "upc": ""
+        },
+        {
+            "Category": {
+                "categoryID": "10",
+                "fullPathName": "Coats/Summer Coats",
+                "leftNode": "2",
+                "name": "Summer Coats",
+                "nodeDepth": "1",
+                "parentID": "6",
+                "rightNode": "3",
+                "timeStamp": "2014-12-16T08:58:23+00:00"
+            },
+            "ItemShops": {
+                "ItemShop": [
+                    {
+                        "backorder": "0",
+                        "componentBackorder": "0",
+                        "componentQoh": "0",
+                        "itemID": "6",
+                        "itemShopID": "12",
+                        "qoh": "50",
+                        "reorderLevel": "0",
+                        "reorderPoint": "0",
+                        "shopID": "1",
+                        "timeStamp": "2014-12-16T09:03:30+00:00"
+                    },
+                    {
+                        "backorder": "0",
+                        "componentBackorder": "0",
+                        "componentQoh": "0",
+                        "itemID": "6",
+                        "itemShopID": "14",
+                        "qoh": "50",
+                        "reorderLevel": "0",
+                        "reorderPoint": "0",
+                        "shopID": "0",
+                        "timeStamp": "2014-12-16T09:03:30+00:00"
+                    }
+                ]
+            },
+            "Note": {
+                "isPublic": "false",
+                "note": "",
+                "timeStamp": "2014-12-16T09:03:30+00:00"
+            },
+            "Prices": {
+                "ItemPrice": [
+                    {
+                        "amount": "90",
+                        "useType": "Default"
+                    },
+                    {
+                        "amount": "90",
+                        "useType": "MSRP"
+                    }
+                ]
+            },
+            "archived": "false",
+            "avgCost": "30",
+            "categoryID": "10",
+            "customSku": "",
+            "defaultCost": "30",
+            "defaultVendorID": "12",
+            "departmentID": "0",
+            "description": "Summer Coat Sunny",
+            "ean": "13213885678",
+            "itemECommerceID": "0",
+            "itemID": "6",
+            "itemMatrixID": "0",
+            "itemType": "default",
+            "manufacturerID": "0",
+            "manufacturerSku": "",
+            "modelYear": "0",
+            "seasonID": "0",
+            "systemSku": "210000000006",
+            "tax": "true",
+            "taxClassID": "0",
+            "timeStamp": "2014-12-16T09:03:30+00:00",
+            "upc": ""
+        },
+        {
+            "Category": {
+                "categoryID": "8",
+                "fullPathName": "Coats/Winter Coats",
+                "leftNode": "4",
+                "name": "Winter Coats",
+                "nodeDepth": "1",
+                "parentID": "6",
+                "rightNode": "5",
+                "timeStamp": "2014-12-16T08:58:23+00:00"
+            },
+            "CustomFieldValues": {
+                "CustomFieldValue": {
+                    "customFieldID": "2",
+                    "customFieldValueID": "8",
+                    "name": "Color",
+                    "type": "string",
+                    "value": "Red"
+                }
+            },
+            "ItemShops": {
+                "ItemShop": [
+                    {
+                        "backorder": "0",
+                        "componentBackorder": "0",
+                        "componentQoh": "0",
+                        "itemID": "8",
+                        "itemShopID": "16",
+                        "qoh": "11",
+                        "reorderLevel": "0",
+                        "reorderPoint": "0",
+                        "shopID": "1",
+                        "timeStamp": "2014-12-16T09:17:23+00:00"
+                    },
+                    {
+                        "backorder": "0",
+                        "componentBackorder": "0",
+                        "componentQoh": "0",
+                        "itemID": "8",
+                        "itemShopID": "18",
+                        "qoh": "11",
+                        "reorderLevel": "0",
+                        "reorderPoint": "0",
+                        "shopID": "0",
+                        "timeStamp": "2014-12-16T09:17:23+00:00"
+                    }
+                ]
+            },
+            "Note": {
+                "isPublic": "false",
+                "note": "",
+                "timeStamp": "2014-12-16T09:13:49+00:00"
+            },
+            "Prices": {
+                "ItemPrice": [
+                    {
+                        "amount": "200",
+                        "useType": "Default"
+                    },
+                    {
+                        "amount": "200",
+                        "useType": "MSRP"
+                    }
+                ]
+            },
+            "archived": "false",
+            "avgCost": "140",
+            "categoryID": "8",
+            "customSku": "",
+            "defaultCost": "140",
+            "defaultVendorID": "12",
+            "departmentID": "0",
+            "description": "Winter Coat Freezy",
+            "ean": "145145451456",
+            "itemECommerceID": "0",
+            "itemID": "8",
+            "itemMatrixID": "0",
+            "itemType": "default",
+            "manufacturerID": "0",
+            "manufacturerSku": "",
+            "modelYear": "0",
+            "seasonID": "0",
+            "systemSku": "210000000010",
+            "tax": "true",
+            "taxClassID": "0",
+            "timeStamp": "2014-12-16T09:13:49+00:00",
+            "upc": ""
+        }
+    ]
+}
