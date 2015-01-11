@@ -1,20 +1,11 @@
 package com.zoined.lightspeedpos.modules;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.JsonToken;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+// POJO class for Sale module. Maps the JSON data to relevant fields.
 public class AccountSale {
 	
 	public static class SaleLines {
@@ -24,13 +15,12 @@ public class AccountSale {
 
 		public Collection<SaleLine> getSaleLines() { return saleLines; }
 
-		public void setSaleLines(Collection<SaleLine> saleLine) { this.saleLines = saleLine; }
-		
+		public void setSaleLines(Collection<SaleLine> saleLine) { this.saleLines = saleLine; }		
 	}
 	
 	public static class SaleLine {
 		@JsonProperty("itemID")
-		private String itemId;					//line_item_nk
+		private String itemId;
 		@JsonProperty("unitPrice")
 		private String unitPrice;
 		@JsonProperty("unitQuantity")
@@ -94,12 +84,21 @@ public class AccountSale {
 	}
 	
 	
-	@JsonPropertyOrder({"total", "calcSubTotal", "calcDiscount"})
 	public static class Sale {
 		
-		private String saleTotal, calcSubtotal, calcDiscount, 
-					headerNk, customer, supplier, organisation, salesPerson, campaign, 
-					currency, purchasePriceWOVat, purchaseCurrency, pieceGood;
+		private String 	saleTotal, 
+						calcSubtotal, 
+						calcDiscount, 
+						headerNk, 
+						customer, 
+						supplier, 
+						organisation, 
+						salesPerson, 
+						campaign, 
+						currency,
+						purchasePriceWOVat, 
+						purchaseCurrency, 
+						pieceGood;
 		
 		private int salesValueWOVat;
 		

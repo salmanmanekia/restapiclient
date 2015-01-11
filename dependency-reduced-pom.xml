@@ -42,5 +42,31 @@
       </plugin>
     </plugins>
   </build>
+  <dependencies>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>6.1.1</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>junit</artifactId>
+          <groupId>junit</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>bsh</artifactId>
+          <groupId>org.beanshell</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>jcommander</artifactId>
+          <groupId>com.beust</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>snakeyaml</artifactId>
+          <groupId>org.yaml</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+  </dependencies>
 </project>
 

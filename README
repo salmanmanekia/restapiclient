@@ -1,0 +1,19 @@
+Instructions on running:
+
+* mvn package
+* java -cp target/LightSpeedPOSClient-0.0.1-SNAPSHOT.jar com.zoined.restapiclient.LightSpeedPOSClient
+
+Result: 
+
+If there is some new data which can be retreived from API then the related CSV file can be found in the /target folder otherwise a message is displayed.
+
+Things to remember:
+
+During the first execution of the program the receipt which is created after the start of year 2015 is only considered.
+During the second execution the receipt which has been created in the API since the last execution is shown.
+If you have to reset this behaviour or change the initial date then you to clear the Preferences. For more details http://docs.oracle.com/javase/7/docs/api/java/util/prefs/Preferences.html#clear%28%29
+
+Future improvements:
+
+Testing !
+

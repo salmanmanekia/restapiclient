@@ -4,6 +4,7 @@
 .gradle
 bin/
 tmp/
+target/
 *.tmp
 *.bak
 *.swp
@@ -33,3 +34,6 @@ local.properties
 ### Eclipse Patch ###
 .classpath
 .project
+
+*.tar
+*~

@@ -4,10 +4,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+//POJO class for Item module. Maps the JSON data to relevant fields.
 public class AccountItem {
 	
 	public static class Note {
-		String note;				// Item -> Note -> note products_description
+		String note;
 		
 		public String getNote() {
 			return note;
@@ -23,7 +24,7 @@ public class AccountItem {
 	}
     
 	public static class Category {
-		String name;				// Item -> Category -> name	categories_nk 
+		String name;
 
 		public String getName() {
 			return name;
@@ -74,8 +75,17 @@ public class AccountItem {
 	
 	@JsonPropertyOrder({"systemSku", "description", "Note" ,"Category", "avgCost", "CustomFieldValues", "itemType"})
 	public static class Item {
-
-		private String systemSku, description, avgCost, itemType, lastPrice, suppliers, productBrands, vatRate, unitOfMeasure, size;
+		
+		private String 	systemSku,
+						description,
+						avgCost,
+						itemType, 
+						lastPrice,
+						suppliers,
+						productBrands,
+						vatRate,
+						unitOfMeasure,
+						size;
 		
 		Category category;
 		
@@ -133,24 +143,6 @@ public class AccountItem {
 		public String getVatRate() { return vatRate; }
 		public String getUnitOfMeasure() { return unitOfMeasure; }
 		public String getSize() { return size; }
-
-		@Override
-		public String toString(){
-			String cFV = "";
-			if (customFieldValues == null){
-				cFV = "";
-			} else {
-			cFV = customFieldValues.customFieldValue.value;
-			}
-			return 
-					getSystemSku() + " " + 
-					getDescription() + " " +
-					note + " " +
-					category + " " +
-					getAvgCost() + " " +
-					cFV + " " +
-					getItemType();		
-		}
 		
 	}
 

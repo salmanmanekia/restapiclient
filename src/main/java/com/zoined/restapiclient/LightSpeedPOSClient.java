@@ -47,7 +47,18 @@ import com.zoined.lightspeedpos.modules.AccountItem.Item;
 import com.zoined.lightspeedpos.modules.AccountSale.Sale;
 import com.zoined.lightspeedpos.modules.AccountSale.SaleLine;
 
-
+/*
+ * LightSpeedPOSClient class implements an application 
+ * that creates HTTP requests for Item and Sale modules from lightspeedpos API.
+ * The response from the API is parsed to a String and then 
+ * the JSON String is map to POJO by using Jackson. 
+ * The CSV is created out of those POJO by using SuperCSV 
+ * 'Writing CSV File' and 'Writing CSV File with Dozer'
+ * for Item and Sale modules respectively.
+ * 
+ * @author 	Muhammad Salman
+ * @version 0.0.1 
+ */
 
 public class LightSpeedPOSClient {
 
@@ -55,21 +66,20 @@ public class LightSpeedPOSClient {
 	private static final String BASE_URL = "https://api.merchantos.com/API/Account/";
 	private static final String ACCOUNT_ID = "101584";
 	private static final String ACCESS_TOKEN = "907737989deadf83929caa127bac6abbcd51671f"; 
-	private static final long START_OF_2014 = 138_853_440_000_0l;
 	private static final long START_OF_2015 = 142_007_040_000_0l;
 	private static final String TIME_STAMP = "TIME_STAMP";
 	private static final String PATTERN = "yyyy-MM-dd'T'HH:mm:ss";
 	
 	private  static final Preferences PREFS = Preferences.userRoot().node(LightSpeedPOSClient.class.getName());
-	
-	private static Scanner sc;
-	
+		
+	// property for the item fields in the csv
 	private static final CellProcessor[] ITEM_PROCESSOR = new CellProcessor[] {
         new Optional(), new Optional(), new Optional(), new Optional(), new Optional(), 
         new Optional(), new Optional(), new Optional(), new Optional(), new Optional(), 
         new Optional(),	new Optional(), new Optional() 
 	};
 	
+	// mapping to AccountItem's properties
 	private static final String[] ITEM_FIELD_MAPPING = new String[] { 
 		"systemSku",
 		"description", 
@@ -85,6 +95,7 @@ public class LightSpeedPOSClient {
 		"customFieldValues.customFieldValue.value",
 		"itemType"};
 	
+	// header for the items csv file
 	private static final String[] ITEM_HEADER = new String[] {
 		"products_nk", 
 		"products_name", 
@@ -100,8 +111,8 @@ public class LightSpeedPOSClient {
 		"color",
 		"type"
 	};
-	
-	
+
+	// header for the sales csv file
 	private static final String[] SALE_HEADER = new String[] {
 		"header_nk",
 		"line_item_nk",
@@ -124,6 +135,7 @@ public class LightSpeedPOSClient {
 		"piece_good"
 	};
 	
+	// property for the sale fields in the csv
 	private static final CellProcessor[] SALE_PROCESSOR = new CellProcessor[] {
         new Optional(), new Optional(), new Optional(), new Optional(), new Optional(), 
         new Optional(), new Optional(), new Optional(), new Optional(), new Optional(), 
@@ -133,9 +145,7 @@ public class LightSpeedPOSClient {
 
 
 	public static enum Module{
-		// 1 : Class name
-		// 2 : Output file name
-		// 3 : Json field name
+		// (Name, Extension, ClassName, CSV, JSONFieldName)
 		ITEM("Item", ".json", "Item", "products.csv", "Item"),
 		SALE("Sale", ".json", "Sale", "sales.csv", "Sale");
 		
@@ -144,8 +154,7 @@ public class LightSpeedPOSClient {
 		private final String className;
 		private final String csvFileName;
 		private final String jsonFieldName;
-
-		
+	
 		private Module(final String name,
 				final String uriExtension,
 				final String className, 
@@ -160,6 +169,7 @@ public class LightSpeedPOSClient {
 		}
 	}
 	
+	// Static class defining the behavior of the application when unsuccessful response occurs from the server
 	public static class RequestInitializer implements HttpRequestInitializer, HttpUnsuccessfulResponseHandler {
 
 		@Override
@@ -172,7 +182,6 @@ public class LightSpeedPOSClient {
 				boolean retrySupported) throws IOException {
 			int statusCode = response.getStatusCode();
 			if (statusCode == 503) {
-				System.out.println("in 503");
 				try {
 					Thread.sleep(60000);
 					return true;
@@ -184,6 +193,7 @@ public class LightSpeedPOSClient {
 		}	
 	} 
 	
+	// Creates a HTTP request. Sets the URL and the Header and execute the request asynchronously.
 	private static Future<HttpResponse> executeRequest(final Module module, final String prevDate, Executor executor) throws IOException{
 		
 		HttpRequestFactory requestFactory = 
@@ -222,26 +232,17 @@ public class LightSpeedPOSClient {
 	}
 	
 
+	// Gets the TimeStamp of previous application execution. 
 	public static String getPreviousDate() {
-		long prevDateLong = PREFS.getLong(TIME_STAMP, START_OF_2014);
+		long prevDateLong = PREFS.getLong(TIME_STAMP, START_OF_2015);
 		Date prevDate = new Date(prevDateLong);
 		
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(PATTERN, Locale.US);
 		return simpleDateFormat.format(prevDate);
 	}
 	
-	public static String readJsonFromDisk(String fileName) 
-			throws FileNotFoundException {
-		
-		sc = new Scanner(new FileReader(fileName));
-		String json = "";
-		while (sc.hasNextLine()) {
-			json+=sc.nextLine();
-		}
-		return json;
-	}
-	
-	@SuppressWarnings({ "rawtypes" })
+	// A generic function to read the JSON and map the JSON to the POJO class
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static <E, T extends Collection> T readFromJsonAndFillType (
 			String json, 
 			Module module,
@@ -254,16 +255,23 @@ public class LightSpeedPOSClient {
 			.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
 		
 		TypeFactory tf = objMapper.getTypeFactory();
-		JsonNode node = objMapper.readTree(json).get(module.jsonFieldName);	
-		return objMapper.readValue(node.toString(),
-				tf.constructCollectionType(collectionType, elementType));
+		JsonNode node = objMapper.readTree(json).get(module.jsonFieldName);
+		if (node == null) {
+			return (T) new ArrayList<E>();
+		} else {
+			return objMapper.readValue(node.toString(),
+					tf.constructCollectionType(collectionType, elementType));
+		}
 		
 	}
 	
+	// Writes the module data to the CSV.
+	// Writes the module's field information to the CSV file 
 	public static <T> void writeToCsv(ArrayList<T> moduleList, Module module, CellProcessor []processor) {
 		ICsvDozerBeanWriter itemBeanWriter = null;
 		ICsvMapWriter saleMapWriter = null;
 		try {
+			// Uses the Dozer write to map the Item class field to the item CSV 
 			if (module == Module.ITEM) {
 				itemBeanWriter = 
 						new CsvDozerBeanWriter(new FileWriter("target//" + module.csvFileName),
@@ -273,6 +281,8 @@ public class LightSpeedPOSClient {
 		        for(T mod : moduleList ) {
 		             itemBeanWriter.write(mod, processor);
 		        }
+		    // Uses the write CSV to write the Sale class field to the sale CSV manually.
+		    // The mapping was not possible due to deeply nested JSON structure of the Sale JSON.
 			} else if (module == Module.SALE) {
 				
 				final Map<String, Object> salesMap = new HashMap<String, Object>();
@@ -354,67 +364,38 @@ public class LightSpeedPOSClient {
 	} 
 	
 	public static void main(String []args) throws JsonParseException, JsonMappingException, IOException {
-			
-		/*
-		HttpResponse itemResponse = executeRequest(Module.ITEM, prevDateString);
-		String itemData = itemResponse.parseAsString();
-		
-		HttpResponse saleResponse = executeRequest(Module.ITEM, prevDateString);
-		String saleData = saleResponse.parseAsString();		
-		*/
-		
 		ExecutorService executor = Executors.newCachedThreadPool();		
 
-		Future<HttpResponse> itemResponse = executeRequestWithoutPrevDate(Module.ITEM,  executor);
-		Future<HttpResponse> saleResponse = executeRequestWithoutPrevDate(Module.SALE, executor);
-
-		String itemData = null;
-		String saleData = null;
-		
 		try {
-			itemData = itemResponse.get().parseAsString();
-			saleData = saleResponse.get().parseAsString();		
+			String prevDateString = getPreviousDate();
+
+			Future<HttpResponse> itemResponse = executeRequest(Module.ITEM, prevDateString, executor);		
+			Future<HttpResponse> saleResponse = executeRequest(Module.SALE, prevDateString, executor);
+		
+			String itemData = itemResponse.get().parseAsString();
+			String saleData = saleResponse.get().parseAsString();	
+		
+			@SuppressWarnings("unchecked")
+			ArrayList<Item> itemList = readFromJsonAndFillType(itemData, Module.ITEM, ArrayList.class, Item.class);
+			if (itemList.isEmpty()) {
+				System.out.println("No new Item data since the last runs");
+			} else {
+				writeToCsv(itemList, Module.ITEM, ITEM_PROCESSOR);
+			}
+	
+			@SuppressWarnings("unchecked")
+			ArrayList<Sale> saleList = readFromJsonAndFillType(saleData, Module.SALE, ArrayList.class, Sale.class);
+			if (saleList.isEmpty()) {
+				System.out.println("No new Sale data since the last runs");
+			} else {
+				writeToCsv(saleList, Module.SALE, SALE_PROCESSOR);
+			}
+			PREFS.putLong(TIME_STAMP, new Date().getTime());
+			
 		} catch (InterruptedException | ExecutionException e1) {
 			e1.printStackTrace();
 		} finally {
 			executor.shutdown();
 		}
-		
-		/*
-		String itemJSON = "";
-		String saleJSON = "";
-		try {
-			itemJSON = readJsonFromDisk("AllItem.json");
-			saleJSON = readJsonFromDisk("AllSale.json");
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		}
-		 */
-		
-		@SuppressWarnings("unchecked")
-		ArrayList<Item> itemList = readFromJsonAndFillType(
-				itemData, 
-				Module.ITEM,
-				ArrayList.class,
-				Item.class);
-		
-		writeToCsv(itemList, Module.ITEM, ITEM_PROCESSOR);
-		
-		@SuppressWarnings("unchecked")
-		ArrayList<Sale> saleList = readFromJsonAndFillType(
-				saleData, 
-				Module.SALE, 
-				ArrayList.class,
-				Sale.class);
-		
-		writeToCsv(saleList, Module.SALE, SALE_PROCESSOR);
-							
-		PREFS.putLong(TIME_STAMP, new Date().getTime());
-		try {
-			PREFS.clear();
-		} catch (BackingStoreException e) {
-			e.printStackTrace();
-		}
-		
 	}
 }
